@@ -42,6 +42,7 @@ require("dotenv").config();
 const uploadRoutes = require("./routes/uploadRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
 const authRoutes = require("./routes/authRoutes");
+const ruleRoutes = require("./routes/ruleRoutes");
 
 const app = express();
 
@@ -64,6 +65,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/rules", ruleRoutes);
 
 
 // MongoDB Connection

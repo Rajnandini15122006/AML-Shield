@@ -212,6 +212,7 @@ import Upload from "./pages/Upload";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Playground from "./pages/Playground";
+import RulesEngine from "./pages/RulesEngine";
 
 // Route Guards
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -360,6 +361,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Playground />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/rules"
+          element={
+            <ProtectedRoute>
+              <RulesEngine />
             </ProtectedRoute>
           }
         />

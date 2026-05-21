@@ -42,7 +42,7 @@
 
 
 const express = require("express");
-const { getTransactions, simulateTransaction } = require("../controllers/transactionController");
+const { getTransactions, simulateTransaction, generateNarrative } = require("../controllers/transactionController");
 const protect = require("../middleware/auth");
 
 const router = express.Router();
@@ -52,5 +52,8 @@ router.get("/", protect, getTransactions);
 
 // SIMULATE TRANSACTION
 router.post("/simulate", protect, simulateTransaction);
+
+// GENERATE NARRATIVE (LLM)
+router.post("/generate-narrative", protect, generateNarrative);
 
 module.exports = router;
