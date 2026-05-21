@@ -18,13 +18,39 @@ from src.risk.risk_scoring import RiskScoringEngine
 def load_transaction_data(file_path):
     """
     Loads transaction sheet from Excel or CSV.
+    Supports extensionless files by detecting file signatures.
     """
     if file_path.endswith('.csv'):
         df = pd.read_csv(file_path)
     elif file_path.endswith(('.xlsx', '.xls')):
         df = pd.read_excel(file_path)
     else:
-        raise ValueError("Unsupported file format. Use CSV or Excel.")
+        is_excel = False
+        try:
+            with open(file_path, 'rb') as f:
+                sig = f.read(4)
+                # ZIP signature (for .xlsx) or OLE signature (for .xls)
+                if sig == b'PK\x03\x04' or sig == b'\xd0\xcf\x11\xe0':
+                    is_excel = True
+        except Exception:
+            pass
+
+        if is_excel:
+            try:
+                df = pd.read_excel(file_path)
+            except Exception:
+                try:
+                    df = pd.read_csv(file_path)
+                except Exception:
+                    raise ValueError("Unsupported or corrupted Excel file.")
+        else:
+            try:
+                df = pd.read_csv(file_path)
+            except Exception:
+                try:
+                    df = pd.read_excel(file_path)
+                except Exception:
+                    raise ValueError("Unsupported file format. Use CSV or Excel.")
     
     # Ensure necessary columns exist
     required_cols = ['transactionId', 'amount', 'sender', 'receiver']
