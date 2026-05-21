@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
-const API = "/api/auth";
+const API = `${import.meta.env.VITE_API_BASE_URL || ""}/api/auth`;
 
 export default function Login() {
   const nav = useNavigate();

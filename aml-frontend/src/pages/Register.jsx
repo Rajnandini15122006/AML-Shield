@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCheck } from "react-icons/fa";
 
-const API = "/api/auth";
+const API = `${import.meta.env.VITE_API_BASE_URL || ""}/api/auth`;
 
 const DEPARTMENTS = [
   "AML Investigation",
