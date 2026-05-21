@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCheck } from "react-icons/fa";
 
-const API = `${import.meta.env.VITE_API_BASE_URL || ""}/api/auth`;
+const getApiBase = () => {
+  if (import.meta.env.VITE_API_BASE_URL) return import.meta.env.VITE_API_BASE_URL;
+  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  return isLocal ? "" : "https://aml-shield-backend-jqc8.onrender.com";
+};
+const API = `${getApiBase()}/api/auth`;
 
 const DEPARTMENTS = [
   "AML Investigation",

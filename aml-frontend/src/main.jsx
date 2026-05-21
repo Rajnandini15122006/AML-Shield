@@ -42,8 +42,13 @@ import "./index.css";
 import DataProvider
 from "./context/DataContext";
 
-// Set base URL for axios requests from environment variables
-axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || "";
+// Set base URL for axios requests dynamically with production fallback
+const getApiBase = () => {
+  if (import.meta.env.VITE_API_BASE_URL) return import.meta.env.VITE_API_BASE_URL;
+  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  return isLocal ? "" : "https://aml-shield-backend-jqc8.onrender.com";
+};
+axios.defaults.baseURL = getApiBase();
 
 // Configure axios interceptor to attach JWT token
 axios.interceptors.request.use(

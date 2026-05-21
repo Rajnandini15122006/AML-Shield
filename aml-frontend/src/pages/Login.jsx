@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
-const API = `${import.meta.env.VITE_API_BASE_URL || ""}/api/auth`;
+const getApiBase = () => {
+  if (import.meta.env.VITE_API_BASE_URL) return import.meta.env.VITE_API_BASE_URL;
+  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  return isLocal ? "" : "https://aml-shield-backend-jqc8.onrender.com";
+};
+const API = `${getApiBase()}/api/auth`;
 
 export default function Login() {
   const nav = useNavigate();
