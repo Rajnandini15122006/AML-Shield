@@ -11,7 +11,8 @@ import {
   FaClock,
   FaUser,
   FaSignOutAlt,
-  FaShieldAlt
+  FaShieldAlt,
+  FaFlask
 } from "react-icons/fa";
 
 export default function Layout({ children, active }) {
@@ -22,6 +23,7 @@ export default function Layout({ children, active }) {
     { name: "Upload Dataset", path: "/upload", icon: <FaCloudUploadAlt /> },
     { name: "Transaction Explorer", path: "/transactions", icon: <FaSearchDollar /> },
     { name: "Network Visualization", path: "/network-graph", icon: <FaProjectDiagram /> },
+    { name: "Scenario Playground", path: "/playground", icon: <FaFlask /> },
     { name: "Explainable AI", path: "/explainable-ai", icon: <FaBrain /> },
     { name: "Fraud Chains", path: "/chains", icon: <FaLink /> },
     { name: "Temporal Analysis", path: "/analytics", icon: <FaChartLine /> },
@@ -72,6 +74,7 @@ export default function Layout({ children, active }) {
               (item.name === "Upload Dataset" && active === "Upload CSV") || 
               (item.name === "Transaction Explorer" && active === "Transactions") || 
               (item.name === "Network Visualization" && active === "Network Graph") || 
+              (item.name === "Scenario Playground" && active === "Playground") ||
               (item.name === "Fraud Chains" && active === "Suspicious Chains") ||
               (item.name === "Profile & Settings" && active === "Settings");
 

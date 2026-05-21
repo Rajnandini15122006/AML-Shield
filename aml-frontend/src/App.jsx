@@ -211,6 +211,7 @@ import History from "./pages/History";
 import Upload from "./pages/Upload";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
+import Playground from "./pages/Playground";
 
 // Route Guards
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -350,6 +351,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Settings />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/playground"
+          element={
+            <ProtectedRoute>
+              <Playground />
             </ProtectedRoute>
           }
         />

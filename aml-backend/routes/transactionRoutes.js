@@ -41,27 +41,16 @@
 
 
 
-const express =
-  require("express");
-
-const {
-  getTransactions
-} = require(
-  "../controllers/transactionController"
-);
+const express = require("express");
+const { getTransactions, simulateTransaction } = require("../controllers/transactionController");
 const protect = require("../middleware/auth");
 
-const router =
-  express.Router();
-
+const router = express.Router();
 
 // GET TRANSACTIONS
+router.get("/", protect, getTransactions);
 
-router.get(
-  "/",
-  protect,
-  getTransactions
-);
+// SIMULATE TRANSACTION
+router.post("/simulate", protect, simulateTransaction);
 
-module.exports =
-  router;
+module.exports = router;
