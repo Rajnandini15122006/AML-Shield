@@ -2,3 +2,8 @@ data/
 *.zip
 *.csv
 node_modules
+__pycache__/
+*.pyc
+mongodb_data/
+aml-backend/uploads/*
+!aml-backend/uploads/.gitkeep

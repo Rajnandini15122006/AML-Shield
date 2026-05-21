@@ -9,6 +9,7 @@ const {
 } = require(
   "../controllers/uploadController"
 );
+const protect = require("../middleware/auth");
 
 const router =
   express.Router();
@@ -20,6 +21,7 @@ const upload =
 
 router.post(
   "/",
+  protect,
   upload.single("file"),
   uploadFile
 );

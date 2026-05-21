@@ -39,11 +39,9 @@ const cors = require("cors");
 
 require("dotenv").config();
 
-const uploadRoutes =
-  require("./routes/uploadRoutes");
-
-const transactionRoutes =
-  require("./routes/transactionRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
+const transactionRoutes = require("./routes/transactionRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -51,7 +49,7 @@ const app = express();
 // CORS FIX
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "http://localhost:5174"],
   credentials: true
 }));
 
@@ -63,15 +61,9 @@ app.use(express.json());
 
 // Routes
 
-app.use(
-  "/api/upload",
-  uploadRoutes
-);
-
-app.use(
-  "/api/transactions",
-  transactionRoutes
-);
+app.use("/api/auth", authRoutes);
+app.use("/api/upload", uploadRoutes);
+app.use("/api/transactions", transactionRoutes);
 
 
 // MongoDB Connection

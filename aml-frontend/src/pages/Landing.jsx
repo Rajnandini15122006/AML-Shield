@@ -583,6 +583,7 @@
 
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Landing() {
 
@@ -668,32 +669,38 @@ export default function Landing() {
             }}
           >
 
-            <button
-              style={{
-                background:
-                  "linear-gradient(90deg,#4F46E5,#7C3AED)",
-                color: "white",
-                padding: "16px 34px",
-                borderRadius: "14px",
-                fontSize: "15px",
-                fontWeight: "600"
-              }}
-            >
-              Start Investigation
-            </button>
+            <Link to={localStorage.getItem("aml_token") ? "/dashboard" : "/login"} style={{ textDecoration: "none" }}>
+              <button
+                style={{
+                  background:
+                    "linear-gradient(90deg,#4F46E5,#7C3AED)",
+                  color: "white",
+                  padding: "16px 34px",
+                  borderRadius: "14px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  cursor: "pointer"
+                }}
+              >
+                Start Investigation
+              </button>
+            </Link>
 
-            <button
-              style={{
-                background: "transparent",
-                border: "1px solid #334155",
-                color: "white",
-                padding: "16px 34px",
-                borderRadius: "14px",
-                fontSize: "15px"
-              }}
-            >
-              View Demo
-            </button>
+            <Link to="/login" state={{ demo: true }} style={{ textDecoration: "none" }}>
+              <button
+                style={{
+                  background: "transparent",
+                  border: "1px solid #334155",
+                  color: "white",
+                  padding: "16px 34px",
+                  borderRadius: "14px",
+                  fontSize: "15px",
+                  cursor: "pointer"
+                }}
+              >
+                View Demo
+              </button>
+            </Link>
 
           </div>
 

@@ -1,146 +1,154 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  FaChartBar,
+  FaCloudUploadAlt,
+  FaSearchDollar,
+  FaProjectDiagram,
+  FaBrain,
+  FaLink,
+  FaChartLine,
+  FaFileAlt,
+  FaClock,
+  FaUser,
+  FaSignOutAlt,
+  FaShieldAlt
+} from "react-icons/fa";
 
-export default function Layout({
-  children,
-  active
-}) {
+export default function Layout({ children, active }) {
+  const navigate = useNavigate();
 
   const menuItems = [
-
-    "Dashboard",
-    "Upload CSV",
-    "Transactions",
-    "Network Graph",
-    "Suspicious Chains",
-    "Explainable AI",
-    "Analytics",
-    "Reports",
-    "History",
-    "Settings"
-
+    { name: "Overview", path: "/dashboard", icon: <FaChartBar /> },
+    { name: "Upload Dataset", path: "/upload", icon: <FaCloudUploadAlt /> },
+    { name: "Transaction Explorer", path: "/transactions", icon: <FaSearchDollar /> },
+    { name: "Network Visualization", path: "/network-graph", icon: <FaProjectDiagram /> },
+    { name: "Explainable AI", path: "/explainable-ai", icon: <FaBrain /> },
+    { name: "Fraud Chains", path: "/chains", icon: <FaLink /> },
+    { name: "Temporal Analysis", path: "/analytics", icon: <FaChartLine /> },
+    { name: "Reports", path: "/reports", icon: <FaFileAlt /> },
+    { name: "History", path: "/history", icon: <FaClock /> },
+    { name: "Profile & Settings", path: "/settings", icon: <FaUser /> }
   ];
 
-const getPath = (item) => {
-
-  switch (item) {
-
-    case "Dashboard":
-      return "/dashboard";
-
-    case "Transactions":
-      return "/transactions";
-
-    case "Network Graph":
-      return "/network-graph";
-
-    case "Explainable AI":
-      return "/explainable-ai";
-
-    case "Analytics":
-      return "/analytics";
-
-    case "Reports":
-      return "/reports";
-
-    default:
-      return "/dashboard";
-  }
-};
-
   return (
-
     <div
       style={{
         display: "flex",
         minHeight: "100vh",
-        background: "#f5f7fb"
+        background: "#F8FAFC",
+        color: "#0F172A"
       }}
     >
-
       {/* SIDEBAR */}
-
       <div
         style={{
-          width: "260px",
-          background: "white",
-          borderRight: "1px solid #E2E8F0",
-          padding: "30px"
+          width: "280px",
+          background: "#0F172A",
+          padding: "30px 20px",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+          color: "#94A3B8"
         }}
       >
-
-        <h2
-          style={{
-            color: "#111827",
-            marginBottom: "45px",
-            fontSize: "34px"
-          }}
-        >
-          AML Shield
-        </h2>
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "12px"
-          }}
-        >
-
-          {menuItems.map((item) => (
-
-            <Link
-              key={item}
-              to={getPath(item)}
-            >
-
-              <div
-                style={{
-                  padding: "14px 18px",
-                  borderRadius: "14px",
-
-                  background:
-                    active === item
-                      ? "linear-gradient(135deg,#4F46E5,#7C3AED)"
-                      : "transparent",
-
-                  color:
-                    active === item
-                      ? "white"
-                      : "#475569",
-
-                  fontWeight:
-                    active === item
-                      ? "600"
-                      : "500",
-
-                  cursor: "pointer"
-                }}
-              >
-                {item}
-              </div>
-
-            </Link>
-
-          ))}
-
+        {/* LOGO */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "40px", padding: "0 10px" }}>
+          <div style={{ background: "#1E3A8A", padding: "10px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <FaShieldAlt size={20} color="#FFFFFF" />
+          </div>
+          <div>
+            <h2 style={{ fontSize: "18px", fontWeight: "800", color: "#FFFFFF", margin: 0, letterSpacing: "0.5px" }}>
+              AML SHIELD
+            </h2>
+            <span style={{ fontSize: "10px", color: "#64748B", letterSpacing: "1px", fontWeight: "700" }}>COMPLIANCE SYSTEM</span>
+          </div>
         </div>
 
+        {/* MENU */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "6px", flex: 1 }}>
+          {menuItems.map((item) => {
+            const isActive = active === item.name || 
+              (item.name === "Overview" && active === "Dashboard") || 
+              (item.name === "Upload Dataset" && active === "Upload CSV") || 
+              (item.name === "Transaction Explorer" && active === "Transactions") || 
+              (item.name === "Network Visualization" && active === "Network Graph") || 
+              (item.name === "Fraud Chains" && active === "Suspicious Chains") ||
+              (item.name === "Profile & Settings" && active === "Settings");
+
+            return (
+              <Link key={item.name} to={item.path}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                    padding: "12px 18px",
+                    borderRadius: "10px",
+                    transition: "all 0.2s ease-in-out",
+                    background: isActive ? "rgba(255, 255, 255, 0.08)" : "transparent",
+                    color: isActive ? "#FFFFFF" : "#94A3B8",
+                    fontWeight: isActive ? "600" : "500",
+                    borderLeft: isActive ? "3px solid #3B82F6" : "3px solid transparent",
+                    cursor: "pointer",
+                    paddingLeft: isActive ? "15px" : "18px"
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = "#FFFFFF";
+                      e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = "#94A3B8";
+                      e.currentTarget.style.background = "transparent";
+                    }
+                  }}
+                >
+                  <span style={{ fontSize: "16px", display: "flex", alignItems: "center" }}>{item.icon}</span>
+                  <span style={{ fontSize: "14px" }}>{item.name}</span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* LOGOUT BUTTON */}
+        <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.05)", paddingTop: "20px" }}>
+          <div
+            onClick={() => {
+              localStorage.removeItem("aml_token");
+              localStorage.removeItem("aml_user");
+              window.location.href = "/landing";
+            }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "14px",
+              padding: "12px 18px",
+              borderRadius: "10px",
+              color: "#F87171",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.2s ease-in-out"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(239, 68, 68, 0.08)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+            }}
+          >
+            <FaSignOutAlt size={16} />
+            <span style={{ fontSize: "14px" }}>Logout</span>
+          </div>
+        </div>
       </div>
 
-      {/* MAIN */}
-
-      <div
-        style={{
-          flex: 1,
-          padding: "35px"
-        }}
-      >
-
+      {/* MAIN CONTAINER */}
+      <div style={{ flex: 1, padding: "40px", overflowY: "auto", maxHeight: "100vh", background: "#F8FAFC" }}>
         {children}
-
       </div>
-
     </div>
-
   );
 }

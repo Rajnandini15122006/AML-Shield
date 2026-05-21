@@ -200,21 +200,27 @@ import {
 
 import LandingPage from "./pages/Landing";
 import Register from "./pages/Register";
-
 import Dashboard from "./pages/Dashboard";
-
 import Transactions from "./pages/Transactions";
-
 import NetworkGraph from "./pages/NetworkGraph";
-
 import ExplainableAI from "./pages/ExplainableAI";
-
 import Analytics from "./pages/Analytics";
-
 import Reports from "./pages/Reports";
-
 import SuspiciousChains from "./pages/SuspiciousChains";
+import History from "./pages/History";
+import Upload from "./pages/Upload";
+import Settings from "./pages/Settings";
 import Login from "./pages/Login";
+
+// Route Guards
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
+
+// Landing section pages
+import Solutions from "./pages/Solutions";
+import LandingAnalyticsPage from "./pages/LandingAnalytics";
+import SecurityPage from "./pages/SecurityPage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
 
@@ -240,50 +246,119 @@ function App() {
 
         <Route
           path="/login"
-          element={<Login />}
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
         />
 
         <Route
           path="/register"
-          element={<Register />}
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
         />
 
         {/* DASHBOARD */}
 
         <Route
           path="/dashboard"
-          element={<Dashboard />}
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/transactions"
-          element={<Transactions />}
+          element={
+            <ProtectedRoute>
+              <Transactions />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/network-graph"
-          element={<NetworkGraph />}
+          element={
+            <ProtectedRoute>
+              <NetworkGraph />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/explainable-ai"
-          element={<ExplainableAI />}
+          element={
+            <ProtectedRoute>
+              <ExplainableAI />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/analytics"
-          element={<Analytics />}
+          element={
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/reports"
-          element={<Reports />}
+          element={
+            <ProtectedRoute>
+              <Reports />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/chains"
-          element={<SuspiciousChains />}
+          element={
+            <ProtectedRoute>
+              <SuspiciousChains />
+            </ProtectedRoute>
+          }
         />
+
+        <Route
+          path="/history"
+          element={
+            <ProtectedRoute>
+              <History />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/upload"
+          element={
+            <ProtectedRoute>
+              <Upload />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* LANDING NAVBAR PAGES */}
+        <Route path="/solutions" element={<Solutions />} />
+        <Route path="/analytics-platform" element={<LandingAnalyticsPage />} />
+        <Route path="/security" element={<SecurityPage />} />
+        <Route path="/contact" element={<ContactPage />} />
 
       </Routes>
 

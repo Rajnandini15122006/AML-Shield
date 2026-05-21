@@ -10,7 +10,7 @@ const getTransactions =
     try {
 
       const transactions =
-        await Transaction.find()
+        await Transaction.find({ userId: req.userId })
 
         .limit(100);
 

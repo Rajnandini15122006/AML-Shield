@@ -39,6 +39,21 @@ const transactionSchema =
       default: 0
     },
 
+    gnnScore: {
+      type: Number,
+      default: 0
+    },
+
+    clusterRisk: {
+      type: Number,
+      default: 0
+    },
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+
     createdAt: {
       type: Date,
       default: Date.now

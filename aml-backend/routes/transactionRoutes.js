@@ -49,6 +49,7 @@ const {
 } = require(
   "../controllers/transactionController"
 );
+const protect = require("../middleware/auth");
 
 const router =
   express.Router();
@@ -58,6 +59,7 @@ const router =
 
 router.get(
   "/",
+  protect,
   getTransactions
 );
 

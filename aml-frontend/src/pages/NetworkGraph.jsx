@@ -1,1037 +1,460 @@
-// import {
-//   FaProjectDiagram,
-//   FaSearch,
-//   FaShieldAlt,
-//   FaExclamationTriangle
-// } from "react-icons/fa";
-
-// export default function NetworkGraph() {
-
-//   return (
-
-//     <div
-//       style={{
-//         display: "flex",
-//         minHeight: "100vh",
-//         background: "#f5f7fb"
-//       }}
-//     >
-
-//       {/* SIDEBAR */}
-
-//       <div
-//         style={{
-//           width: "260px",
-//           background: "white",
-//           borderRight: "1px solid #E2E8F0",
-//           padding: "30px"
-//         }}
-//       >
-
-//         <h2
-//           style={{
-//             color: "#111827",
-//             marginBottom: "45px",
-//             fontSize: "34px"
-//           }}
-//         >
-//           AML Shield
-//         </h2>
-
-//         <div
-//           style={{
-//             display: "flex",
-//             flexDirection: "column",
-//             gap: "12px"
-//           }}
-//         >
-
-//           {[
-//             "Dashboard",
-//             "Upload CSV",
-//             "Transactions",
-//             "Network Graph",
-//             "Suspicious Chains",
-//             "Explainable AI",
-//             "Analytics",
-//             "Reports",
-//             "History",
-//             "Settings"
-//           ].map((item) => (
-
-//             <div
-//               key={item}
-//               style={{
-//                 padding: "14px 18px",
-//                 borderRadius: "14px",
-
-//                 background:
-//                   item === "Network Graph"
-//                     ? "linear-gradient(135deg,#4F46E5,#7C3AED)"
-//                     : "transparent",
-
-//                 color:
-//                   item === "Network Graph"
-//                     ? "white"
-//                     : "#475569",
-
-//                 fontWeight:
-//                   item === "Network Graph"
-//                     ? "600"
-//                     : "500",
-
-//                 cursor: "pointer"
-//               }}
-//             >
-//               {item}
-//             </div>
-
-//           ))}
-
-//         </div>
-
-//       </div>
-
-//       {/* MAIN */}
-
-//       <div
-//         style={{
-//           flex: 1,
-//           padding: "35px"
-//         }}
-//       >
-
-//         {/* TOP */}
-
-//         <div
-//           style={{
-//             display: "flex",
-//             justifyContent: "space-between",
-//             alignItems: "center",
-//             marginBottom: "30px",
-//             flexWrap: "wrap",
-//             gap: "20px"
-//           }}
-//         >
-
-//           <div>
-
-//             <h1
-//               style={{
-//                 fontSize: "38px",
-//                 color: "#111827",
-//                 marginBottom: "10px"
-//               }}
-//             >
-//               Network Graph Analysis
-//             </h1>
-
-//             <p
-//               style={{
-//                 color: "#64748B"
-//               }}
-//             >
-//               Visualize suspicious transaction chains and wallet connections
-//             </p>
-
-//           </div>
-
-//           {/* SEARCH */}
-
-//           <div
-//             style={{
-//               background: "white",
-//               display: "flex",
-//               alignItems: "center",
-//               gap: "10px",
-//               padding: "14px 18px",
-//               borderRadius: "14px",
-//               border: "1px solid #CBD5E1",
-//               width: "320px"
-//             }}
-//           >
-
-//             <FaSearch color="#64748B" />
-
-//             <input
-//               type="text"
-//               placeholder="Search wallet / transaction"
-//               style={{
-//                 border: "none",
-//                 outline: "none",
-//                 width: "100%",
-//                 background: "transparent"
-//               }}
-//             />
-
-//           </div>
-
-//         </div>
-
-//         {/* STATS */}
-
-//         <div
-//           style={{
-//             display: "grid",
-//             gridTemplateColumns:
-//               "repeat(auto-fit,minmax(240px,1fr))",
-
-//             gap: "22px",
-//             marginBottom: "30px"
-//           }}
-//         >
-
-//           <StatCard
-//             icon={<FaProjectDiagram />}
-//             title="Connected Wallets"
-//             value="12,842"
-//           />
-
-//           <StatCard
-//             icon={<FaShieldAlt />}
-//             title="Safe Nodes"
-//             value="10,421"
-//           />
-
-//           <StatCard
-//             icon={<FaExclamationTriangle />}
-//             title="Suspicious Nodes"
-//             value="284"
-//             danger
-//           />
-
-//         </div>
-
-//         {/* GRAPH AREA */}
-
-//         <div
-//           style={{
-//             background: "white",
-//             borderRadius: "30px",
-//             padding: "30px",
-//             boxShadow:
-//               "0 10px 30px rgba(0,0,0,0.04)"
-//           }}
-//         >
-
-//           <div
-//             style={{
-//               display: "flex",
-//               justifyContent: "space-between",
-//               alignItems: "center",
-//               marginBottom: "30px",
-//               flexWrap: "wrap",
-//               gap: "20px"
-//             }}
-//           >
-
-//             <div>
-
-//               <h2
-//                 style={{
-//                   color: "#111827",
-//                   marginBottom: "8px"
-//                 }}
-//               >
-//                 Transaction Relationship Graph
-//               </h2>
-
-//               <p
-//                 style={{
-//                   color: "#64748B"
-//                 }}
-//               >
-//                 AI-generated visualization of suspicious transaction paths
-//               </p>
-
-//             </div>
-
-//             <button
-//               style={{
-//                 background:
-//                   "linear-gradient(135deg,#4F46E5,#7C3AED)",
-
-//                 color: "white",
-//                 border: "none",
-//                 padding: "14px 22px",
-//                 borderRadius: "14px",
-//                 fontWeight: "600",
-//                 cursor: "pointer"
-//               }}
-//             >
-//               Generate Graph
-//             </button>
-
-//           </div>
-
-//           {/* FAKE GRAPH */}
-
-//           <div
-//             style={{
-//               height: "600px",
-//               borderRadius: "24px",
-//               background:
-//                 "linear-gradient(to bottom right,#F8FAFC,#EEF2FF)",
-
-//               position: "relative",
-//               overflow: "hidden"
-//             }}
-//           >
-
-//             {/* CENTER NODE */}
-
-//             <Node
-//               top="42%"
-//               left="46%"
-//               label="TXN78231"
-//               color="#EF4444"
-//               size="95px"
-//             />
-
-//             {/* SAFE */}
-
-//             <Node
-//               top="18%"
-//               left="28%"
-//               label="Wallet A"
-//               color="#10B981"
-//             />
-
-//             <Node
-//               top="22%"
-//               left="68%"
-//               label="Wallet B"
-//               color="#6366F1"
-//             />
-
-//             <Node
-//               top="70%"
-//               left="30%"
-//               label="Wallet C"
-//               color="#F59E0B"
-//             />
-
-//             <Node
-//               top="72%"
-//               left="68%"
-//               label="Wallet D"
-//               color="#8B5CF6"
-//             />
-
-//             {/* CONNECTIONS */}
-
-//             <Line
-//               top="32%"
-//               left="38%"
-//               rotate="-30deg"
-//             />
-
-//             <Line
-//               top="32%"
-//               left="54%"
-//               rotate="30deg"
-//             />
-
-//             <Line
-//               top="58%"
-//               left="38%"
-//               rotate="30deg"
-//             />
-
-//             <Line
-//               top="58%"
-//               left="54%"
-//               rotate="-30deg"
-//             />
-
-//           </div>
-
-//         </div>
-
-//       </div>
-
-//     </div>
-
-//   );
-// }
-
-// function StatCard({
-//   icon,
-//   title,
-//   value,
-//   danger
-// }) {
-
-//   return (
-
-//     <div
-//       style={{
-//         background: "white",
-//         borderRadius: "24px",
-//         padding: "28px",
-//         boxShadow:
-//           "0 10px 30px rgba(0,0,0,0.04)"
-//       }}
-//     >
-
-//       <div
-//         style={{
-//           width: "58px",
-//           height: "58px",
-//           borderRadius: "18px",
-
-//           background: danger
-//             ? "rgba(239,68,68,0.12)"
-//             : "rgba(99,102,241,0.12)",
-
-//           color: danger
-//             ? "#EF4444"
-//             : "#6366F1",
-
-//           display: "flex",
-//           alignItems: "center",
-//           justifyContent: "center",
-
-//           fontSize: "22px",
-//           marginBottom: "20px"
-//         }}
-//       >
-//         {icon}
-//       </div>
-
-//       <p
-//         style={{
-//           color: "#64748B",
-//           marginBottom: "10px"
-//         }}
-//       >
-//         {title}
-//       </p>
-
-//       <h2
-//         style={{
-//           color: "#111827",
-//           fontSize: "34px"
-//         }}
-//       >
-//         {value}
-//       </h2>
-
-//     </div>
-
-//   );
-// }
-
-// function Node({
-//   top,
-//   left,
-//   label,
-//   color,
-//   size = "75px"
-// }) {
-
-//   return (
-
-//     <div
-//       style={{
-//         position: "absolute",
-//         top,
-//         left,
-
-//         width: size,
-//         height: size,
-
-//         borderRadius: "50%",
-
-//         background: color,
-
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "center",
-
-//         color: "white",
-//         fontWeight: "600",
-
-//         boxShadow:
-//           "0 10px 30px rgba(0,0,0,0.15)"
-//       }}
-//     >
-
-//       <span
-//         style={{
-//           fontSize: "12px",
-//           textAlign: "center",
-//           padding: "6px"
-//         }}
-//       >
-//         {label}
-//       </span>
-
-//     </div>
-
-//   );
-// }
-
-// function Line({
-//   top,
-//   left,
-//   rotate
-// }) {
-
-//   return (
-
-//     <div
-//       style={{
-//         position: "absolute",
-//         top,
-//         left,
-
-//         width: "180px",
-//         height: "3px",
-
-//         background:
-//           "linear-gradient(90deg,#6366F1,#8B5CF6)",
-
-//         transform: `rotate(${rotate})`
-//       }}
-//     />
-
-//   );
-// }
-
-
-
-import {
-  useState,
-  useContext
-} from "react";
-
-import {
-  FaProjectDiagram,
-  FaSearch,
-  FaShieldAlt,
-  FaExclamationTriangle
-} from "react-icons/fa";
-
-import {
-  DataContext
-} from "../context/DataContext";
-
+import { useState, useContext, useEffect, useMemo } from "react";
+import { FaProjectDiagram, FaShieldAlt, FaExclamationTriangle, FaSync, FaSearch, FaTimes, FaArrowUp, FaArrowDown } from "react-icons/fa";
+import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState } from "reactflow";
+import "reactflow/dist/style.css";
+import { DataContext } from "../context/DataContext";
 import Layout from "../components/Layout";
 
 export default function NetworkGraph() {
+  const { datasetUploaded, transactions } = useContext(DataContext);
+  const [graphGenerated, setGraphGenerated] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedWallet, setSelectedWallet] = useState(null);
 
-  const {
-    datasetUploaded
-  } = useContext(DataContext);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
-  const [graphGenerated,
-    setGraphGenerated] =
-    useState(false);
+  // Compute graph nodes and edges when transactions update, search changes, or selection changes
+  useEffect(() => {
+    if (!transactions.length || !graphGenerated) return;
+
+    const uniqueWallets = new Set();
+    const walletRisks = {};
+    const walletTransactions = {};
+
+    transactions.forEach((tx) => {
+      if (tx.sender) {
+        uniqueWallets.add(tx.sender);
+        if (tx.risk === "High Risk") walletRisks[tx.sender] = "High Risk";
+        else if (tx.risk === "Medium Risk" && walletRisks[tx.sender] !== "High Risk") walletRisks[tx.sender] = "Medium Risk";
+        else if (!walletRisks[tx.sender]) walletRisks[tx.sender] = "Low Risk";
+
+        walletTransactions[tx.sender] = (walletTransactions[tx.sender] || 0) + 1;
+      }
+      if (tx.receiver) {
+        uniqueWallets.add(tx.receiver);
+        if (tx.risk === "High Risk") walletRisks[tx.receiver] = "High Risk";
+        else if (tx.risk === "Medium Risk" && walletRisks[tx.receiver] !== "High Risk") walletRisks[tx.receiver] = "Medium Risk";
+        else if (!walletRisks[tx.receiver]) walletRisks[tx.receiver] = "Low Risk";
+
+        walletTransactions[tx.receiver] = (walletTransactions[tx.receiver] || 0) + 1;
+      }
+    });
+
+    // Take top 18 wallets by activity to prevent clutter
+    const walletArray = Array.from(uniqueWallets)
+      .sort((a, b) => (walletTransactions[b] || 0) - (walletTransactions[a] || 0))
+      .slice(0, 18);
+
+    const generatedNodes = [];
+    const generatedEdges = [];
+
+    // Calculate node coordinates in a circular arrangement
+    walletArray.forEach((wallet, index) => {
+      const angle = (index / walletArray.length) * 2 * Math.PI;
+      const radius = index % 2 === 0 ? 220 : 340; // layered circle layout
+      const x = 500 + radius * Math.cos(angle);
+      const y = 350 + radius * Math.sin(angle);
+
+      const risk = walletRisks[wallet] || "Low Risk";
+      const isSearched = searchQuery && wallet.toLowerCase().includes(searchQuery.toLowerCase());
+      const isSelected = selectedWallet === wallet;
+
+      const nodeColor = risk === "High Risk" ? "#DC2626" : risk === "Medium Risk" ? "#D97706" : "#1E3A8A";
+      
+      let nodeShadow = "0 2px 6px rgba(0,0,0,0.06)";
+      if (isSelected) {
+        nodeShadow = "0 0 15px rgba(30, 58, 138, 0.25)";
+      } else if (isSearched) {
+        nodeShadow = "0 0 12px rgba(59, 130, 246, 0.25)";
+      }
+
+      generatedNodes.push({
+        id: wallet,
+        data: { label: `${wallet.substring(0, 8)}...` },
+        position: { x, y },
+        style: {
+          background: isSelected ? "#EFF6FF" : "#FFFFFF",
+          color: "#0F172A",
+          border: isSelected 
+            ? "3px solid #1E3A8A" 
+            : isSearched 
+            ? "2px solid #3B82F6" 
+            : `2px solid ${nodeColor}`,
+          borderRadius: "10px",
+          padding: "12px",
+          fontSize: "11px",
+          fontFamily: "monospace",
+          boxShadow: nodeShadow,
+          width: 130,
+          textAlign: "center",
+          fontWeight: isSelected || isSearched ? "bold" : "normal",
+          cursor: "pointer"
+        }
+      });
+    });
+
+    // Build connections/edges
+    transactions.forEach((tx, idx) => {
+      if (walletArray.includes(tx.sender) && walletArray.includes(tx.receiver)) {
+        const isHigh = tx.risk === "High Risk";
+        const edgeColor = isHigh ? "#DC2626" : tx.risk === "Medium Risk" ? "#D97706" : "#CBD5E1";
+        
+        generatedEdges.push({
+          id: `e-${idx}-${tx.transactionId}`,
+          source: tx.sender,
+          target: tx.receiver,
+          label: `${tx.amount} BTC`,
+          animated: isHigh,
+          style: { stroke: edgeColor, strokeWidth: isHigh ? 3 : 1.5 },
+          labelStyle: { fill: "#475569", fontSize: "10px", fontWeight: "600", fillOpacity: 0.8 },
+          labelBgStyle: { fill: "#FFFFFF", fillOpacity: 0.95 }
+        });
+      }
+    });
+
+    setNodes(generatedNodes);
+    setEdges(generatedEdges);
+  }, [transactions, graphGenerated, searchQuery, selectedWallet, setNodes, setEdges]);
+
+  // Network statistics
+  const metrics = useMemo(() => {
+    if (!transactions.length) return { nodes: 0, edges: 0, highRisk: 0 };
+    const unique = new Set(transactions.flatMap((tx) => [tx.sender, tx.receiver]).filter(Boolean));
+    const high = transactions.filter((t) => t.risk === "High Risk").length;
+    return {
+      nodes: unique.size,
+      edges: transactions.length,
+      highRisk: high
+    };
+  }, [transactions]);
+
+  // Dynamic calculations for selected wallet details panel
+  const walletDetails = useMemo(() => {
+    if (!selectedWallet || !transactions.length) return null;
+
+    const relatedTxs = transactions.filter(
+      (tx) => tx.sender === selectedWallet || tx.receiver === selectedWallet
+    );
+
+    let highestRisk = "Low Risk";
+    let totalSent = 0;
+    let totalReceived = 0;
+
+    relatedTxs.forEach((tx) => {
+      // Determine highest risk category
+      if (tx.risk === "High Risk") highestRisk = "High Risk";
+      else if (tx.risk === "Medium Risk" && highestRisk !== "High Risk") highestRisk = "Medium Risk";
+
+      // Sum sent vs received volume
+      const val = parseFloat(tx.amount) || 0;
+      if (tx.sender === selectedWallet) {
+        totalSent += val;
+      }
+      if (tx.receiver === selectedWallet) {
+        totalReceived += val;
+      }
+    });
+
+    return {
+      address: selectedWallet,
+      risk: highestRisk,
+      txCount: relatedTxs.length,
+      sentVolume: totalSent.toFixed(4),
+      recvVolume: totalReceived.toFixed(4),
+      recentTxs: relatedTxs.slice(0, 5)
+    };
+  }, [selectedWallet, transactions]);
+
+  const onNodeClick = (event, node) => {
+    setSelectedWallet(node.id);
+  };
 
   return (
-
-    <Layout active="Network Graph">
-
-      {/* TOP */}
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "30px",
-          flexWrap: "wrap",
-          gap: "20px"
-        }}
-      >
-
+    <Layout active="Network Visualization">
+      {/* TOPBAR */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "30px", flexWrap: "wrap", gap: "20px" }}>
         <div>
-
           <h1
             style={{
-              fontSize: "38px",
-              color: "#111827",
-              marginBottom: "10px"
+              fontSize: "36px",
+              fontWeight: "800",
+              letterSpacing: "-1px",
+              color: "#1E3A8A",
+              marginBottom: "8px"
             }}
           >
-            Network Graph Analysis
+            Network Visualizer
           </h1>
-
-          <p
-            style={{
-              color: "#64748B"
-            }}
-          >
-            Visualize suspicious transaction chains and wallet connections
+          <p style={{ color: "#475569", fontSize: "15px" }}>
+            Dynamic node connections showing peer-to-peer threat networks
           </p>
-
         </div>
 
-        {/* SEARCH */}
-
+        {/* SEARCH / HIGHLIGHT */}
         <div
+          className="corporate-card"
           style={{
-            background: "white",
             display: "flex",
             alignItems: "center",
             gap: "10px",
-            padding: "14px 18px",
-            borderRadius: "14px",
-            border: "1px solid #CBD5E1",
-            width: "320px"
+            padding: "12px 18px",
+            borderRadius: "10px",
+            background: "#FFFFFF"
           }}
         >
-
-          <FaSearch color="#64748B" />
-
+          <FaSearch color="#1E3A8A" />
           <input
             type="text"
-            placeholder="Search wallet / transaction"
+            placeholder="Highlight wallet key..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               border: "none",
               outline: "none",
-              width: "100%",
-              background: "transparent"
+              background: "transparent",
+              color: "#0F172A",
+              fontSize: "14px",
+              width: "200px"
             }}
           />
-
         </div>
-
       </div>
 
       {/* EMPTY STATE */}
+      {!datasetUploaded && (
+        <div className="corporate-card" style={{ padding: "80px 40px", textAlign: "center", background: "#FFFFFF" }}>
+          <h2 style={{ color: "#0F172A", marginBottom: "15px" }}>No Dataset Uploaded Yet</h2>
+          <p style={{ color: "#475569", fontSize: "17px" }}>Upload a transaction dataset to map network vectors.</p>
+        </div>
+      )}
 
-      {
-        !datasetUploaded && (
-
-          <div
-            style={{
-              background: "white",
-              borderRadius: "28px",
-              padding: "80px",
-              textAlign: "center",
-              boxShadow:
-                "0 10px 30px rgba(0,0,0,0.04)"
-            }}
-          >
-
-            <h2
-              style={{
-                color: "#111827",
-                marginBottom: "15px"
-              }}
-            >
-              No Dataset Uploaded Yet
-            </h2>
-
-            <p
-              style={{
-                color: "#64748B",
-                fontSize: "17px"
-              }}
-            >
-              Upload a transaction dataset to generate investigation graphs
-            </p>
-
+      {/* GRAPH AREA */}
+      {datasetUploaded && (
+        <>
+          {/* STATS */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "25px", marginBottom: "35px" }}>
+            <StatCard icon={<FaProjectDiagram size={20} />} title="Total Active Wallets" value={metrics.nodes} color="#1E3A8A" />
+            <StatCard icon={<FaShieldAlt size={20} />} title="Total Ledger Links" value={metrics.edges} color="#3B82F6" />
+            <StatCard icon={<FaExclamationTriangle size={20} />} title="High Threat Vertices" value={metrics.highRisk} color="#DC2626" danger />
           </div>
 
-        )
-      }
-
-      {/* MAIN CONTENT */}
-
-      {
-        datasetUploaded && (
-
-          <>
-
-            {/* STATS */}
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns:
-                  "repeat(auto-fit,minmax(240px,1fr))",
-
-                gap: "22px",
-                marginBottom: "30px"
-              }}
-            >
-
-              <StatCard
-                icon={<FaProjectDiagram />}
-                title="Connected Wallets"
-                value="12,842"
-              />
-
-              <StatCard
-                icon={<FaShieldAlt />}
-                title="Safe Nodes"
-                value="10,421"
-              />
-
-              <StatCard
-                icon={<FaExclamationTriangle />}
-                title="Suspicious Nodes"
-                value="284"
-                danger
-              />
-
-            </div>
-
-            {/* GRAPH AREA */}
-
-            <div
-              style={{
-                background: "white",
-                borderRadius: "30px",
-                padding: "30px",
-                boxShadow:
-                  "0 10px 30px rgba(0,0,0,0.04)"
-              }}
-            >
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: "30px",
-                  flexWrap: "wrap",
-                  gap: "20px"
-                }}
-              >
-
-                <div>
-
-                  <h2
-                    style={{
-                      color: "#111827",
-                      marginBottom: "8px"
-                    }}
-                  >
-                    Transaction Relationship Graph
-                  </h2>
-
-                  <p
-                    style={{
-                      color: "#64748B"
-                    }}
-                  >
-                    AI-generated visualization of suspicious transaction paths
-                  </p>
-
-                </div>
-
-                <button
-                  onClick={() =>
-                    setGraphGenerated(true)
-                  }
-
-                  style={{
-                    background:
-                      "linear-gradient(135deg,#4F46E5,#7C3AED)",
-
-                    color: "white",
-                    border: "none",
-                    padding: "14px 22px",
-                    borderRadius: "14px",
-                    fontWeight: "600",
-                    cursor: "pointer"
-                  }}
-                >
-                  Generate Graph
-                </button>
-
+          <div className="corporate-card" style={{ padding: "30px", background: "#FFFFFF" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "25px", flexWrap: "wrap", gap: "20px" }}>
+              <div>
+                <h2 style={{ color: "#0F172A", fontSize: "20px", fontWeight: "700", marginBottom: "6px" }}>Transaction Relationship Graph</h2>
+                <p style={{ color: "#475569", fontSize: "14px" }}>
+                  Interactive D3 relational mapping. Click any wallet node to audit localized threat parameters.
+                </p>
               </div>
 
-              {/* GRAPH EMPTY STATE */}
-
-              {
-                !graphGenerated && (
-
-                  <div
-                    style={{
-                      height: "500px",
-                      borderRadius: "24px",
-                      background:
-                        "linear-gradient(to bottom right,#F8FAFC,#EEF2FF)",
-
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center"
-                    }}
-                  >
-
-                    <div>
-
-                      <h2
-                        style={{
-                          color: "#111827",
-                          marginBottom: "15px"
-                        }}
-                      >
-                        No Graph Generated Yet
-                      </h2>
-
-                      <p
-                        style={{
-                          color: "#64748B"
-                        }}
-                      >
-                        Click "Generate Graph"
-                        to visualize suspicious transaction flows
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                )
-              }
-
-              {/* GRAPH */}
-
-              {
-                graphGenerated && (
-
-                  <div
-                    style={{
-                      height: "600px",
-                      borderRadius: "24px",
-                      background:
-                        "linear-gradient(to bottom right,#F8FAFC,#EEF2FF)",
-
-                      position: "relative",
-                      overflow: "hidden"
-                    }}
-                  >
-
-                    {/* CENTER NODE */}
-
-                    <Node
-                      top="42%"
-                      left="46%"
-                      label="TXN78231"
-                      color="#EF4444"
-                      size="95px"
-                    />
-
-                    {/* SAFE */}
-
-                    <Node
-                      top="18%"
-                      left="28%"
-                      label="Wallet A"
-                      color="#10B981"
-                    />
-
-                    <Node
-                      top="22%"
-                      left="68%"
-                      label="Wallet B"
-                      color="#6366F1"
-                    />
-
-                    <Node
-                      top="70%"
-                      left="30%"
-                      label="Wallet C"
-                      color="#F59E0B"
-                    />
-
-                    <Node
-                      top="72%"
-                      left="68%"
-                      label="Wallet D"
-                      color="#8B5CF6"
-                    />
-
-                    {/* CONNECTIONS */}
-
-                    <Line
-                      top="32%"
-                      left="38%"
-                      rotate="-30deg"
-                    />
-
-                    <Line
-                      top="32%"
-                      left="54%"
-                      rotate="30deg"
-                    />
-
-                    <Line
-                      top="58%"
-                      left="38%"
-                      rotate="30deg"
-                    />
-
-                    <Line
-                      top="58%"
-                      left="54%"
-                      rotate="-30deg"
-                    />
-
-                  </div>
-
-                )
-              }
-
+              <button
+                onClick={() => setGraphGenerated(true)}
+                className="neon-btn"
+                style={{ padding: "14px 28px", display: "inline-flex", alignItems: "center", gap: "10px", background: "#1E3A8A", color: "#FFFFFF" }}
+              >
+                <FaSync />
+                Generate Map Layout
+              </button>
             </div>
 
-          </>
+            {/* REACT FLOW CANVAS & DETAILS FLEX GRID */}
+            {!graphGenerated ? (
+              <div style={{ height: "600px", borderRadius: "20px", background: "#F8FAFC", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", border: "1px solid #E2E8F0" }}>
+                <div>
+                  <h2 style={{ color: "#0F172A", marginBottom: "15px", fontSize: "18px" }}>Relational Canvas Off-line</h2>
+                  <p style={{ color: "#475569" }}>Click "Generate Map Layout" to initialize the interactive node visualization grid.</p>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: "flex", gap: "25px", height: "620px", alignItems: "stretch" }}>
+                
+                {/* FLOW CANVAS */}
+                <div
+                  style={{
+                    flex: 1,
+                    borderRadius: "20px",
+                    border: "1px solid #E2E8F0",
+                    background: "#F8FAFC",
+                    overflow: "hidden",
+                    position: "relative"
+                  }}
+                >
+                  <ReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    onNodesChange={onNodesChange}
+                    onEdgesChange={onEdgesChange}
+                    onNodeClick={onNodeClick}
+                    fitView
+                  >
+                    <Background color="#CBD5E1" gap={16} />
+                    <Controls style={{ background: "#FFFFFF", border: "1px solid #CBD5E1", borderRadius: "10px", color: "#0F172A" }} />
+                    <MiniMap
+                      nodeStrokeColor={(n) => {
+                        if (n.style?.border?.includes("#DC2626")) return "#DC2626";
+                        if (n.style?.border?.includes("#D97706")) return "#D97706";
+                        return "#1E3A8A";
+                      }}
+                      nodeColor={(n) => "#FFFFFF"}
+                      maskColor="rgba(241, 245, 249, 0.7)"
+                      style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: "10px" }}
+                    />
+                  </ReactFlow>
+                </div>
 
-        )
-      }
+                {/* INTERACTIVE DETAILS PANEL */}
+                {walletDetails && (
+                  <div
+                    className="corporate-card"
+                    style={{
+                      width: "360px",
+                      background: "#FFFFFF",
+                      border: "1px solid #E2E8F0",
+                      borderRadius: "20px",
+                      padding: "25px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      overflowY: "auto"
+                    }}
+                  >
+                    {/* Panel Header */}
+                    <div>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+                        <h3 style={{ fontSize: "16px", fontWeight: "800", color: "#0F172A", margin: 0 }}>Wallet Audit Panel</h3>
+                        <button
+                          onClick={() => setSelectedWallet(null)}
+                          style={{ background: "transparent", color: "#64748B", cursor: "pointer", border: "none" }}
+                          onMouseEnter={(e) => e.currentTarget.style.color = "#0F172A"}
+                          onMouseLeave={(e) => e.currentTarget.style.color = "#64748B"}
+                        >
+                          <FaTimes size={16} />
+                        </button>
+                      </div>
 
+                      {/* Wallet Hash */}
+                      <div style={{ marginBottom: "20px" }}>
+                        <span style={{ fontSize: "10px", color: "#64748B", textTransform: "uppercase", letterSpacing: "1px" }}>Address Hash</span>
+                        <p style={{ fontSize: "13px", fontFamily: "monospace", color: "#1E3A8A", wordBreak: "break-all", margin: "4px 0 0 0", fontWeight: "700" }}>
+                          {walletDetails.address}
+                        </p>
+                      </div>
+
+                      {/* Audit Metrics */}
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px", marginBottom: "25px" }}>
+                        <div style={{ background: "#F8FAFC", padding: "12px", borderRadius: "10px", border: "1px solid #E2E8F0" }}>
+                          <span style={{ fontSize: "9px", color: "#64748B", textTransform: "uppercase" }}>Risk Rating</span>
+                          <p
+                            style={{
+                              fontSize: "14px",
+                              fontWeight: "800",
+                              margin: "4px 0 0 0",
+                              color: walletDetails.risk === "High Risk" ? "#DC2626" : walletDetails.risk === "Medium Risk" ? "#D97706" : "#059669"
+                            }}
+                          >
+                            {walletDetails.risk}
+                          </p>
+                        </div>
+                        <div style={{ background: "#F8FAFC", padding: "12px", borderRadius: "10px", border: "1px solid #E2E8F0" }}>
+                          <span style={{ fontSize: "9px", color: "#64748B", textTransform: "uppercase" }}>Interactions</span>
+                          <p style={{ fontSize: "14px", fontWeight: "800", color: "#0F172A", margin: "4px 0 0 0" }}>
+                            {walletDetails.txCount} txs
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Volume Details */}
+                      <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "25px" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", borderBottom: "1px solid #F1F5F9", paddingBottom: "8px" }}>
+                          <span style={{ color: "#475569", display: "flex", alignItems: "center", gap: "6px" }}><FaArrowUp size={10} color="#DC2626" /> Sent Volume</span>
+                          <span style={{ fontWeight: "700", color: "#0F172A" }}>{walletDetails.sentVolume} BTC</span>
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                          <span style={{ color: "#475569", display: "flex", alignItems: "center", gap: "6px" }}><FaArrowDown size={10} color="#059669" /> Received Volume</span>
+                          <span style={{ fontWeight: "700", color: "#0F172A" }}>{walletDetails.recvVolume} BTC</span>
+                        </div>
+                      </div>
+
+                      {/* Recent Flows */}
+                      <div>
+                        <span style={{ fontSize: "10px", color: "#64748B", textTransform: "uppercase", letterSpacing: "1px", display: "block", marginBottom: "10px" }}>Recent Routes</span>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                          {walletDetails.recentTxs.map((t, i) => {
+                            const isSender = t.sender === selectedWallet;
+                            return (
+                              <div
+                                key={i}
+                                style={{
+                                  background: "#F8FAFC",
+                                  border: "1px solid #E2E8F0",
+                                  padding: "8px 12px",
+                                  borderRadius: "10px",
+                                  fontSize: "12px",
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                  alignItems: "center"
+                                }}
+                              >
+                                <span style={{ color: isSender ? "#DC2626" : "#059669", fontWeight: "600" }}>
+                                  {isSender ? "OUT" : "IN"}
+                                </span>
+                                <span style={{ color: "#475569", fontFamily: "monospace" }}>
+                                  {isSender ? `${t.receiver.substring(0, 6)}...` : `${t.sender.substring(0, 6)}...`}
+                                </span>
+                                <span style={{ fontWeight: "600", color: "#0F172A" }}>
+                                  {t.amount} BTC
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                )}
+
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </Layout>
-
   );
 }
 
-function StatCard({
-  icon,
-  title,
-  value,
-  danger
-}) {
-
+function StatCard({ icon, title, value, color, danger }) {
   return (
-
     <div
+      className="corporate-card"
       style={{
-        background: "white",
-        borderRadius: "24px",
-        padding: "28px",
-        boxShadow:
-          "0 10px 30px rgba(0,0,0,0.04)"
+        padding: "24px 28px",
+        display: "flex",
+        alignItems: "center",
+        gap: "20px",
+        background: "#FFFFFF",
+        border: danger ? "1px solid rgba(220, 38, 38, 0.25)" : "1px solid #E2E8F0"
       }}
     >
-
       <div
         style={{
-          width: "58px",
-          height: "58px",
-          borderRadius: "18px",
-
-          background: danger
-            ? "rgba(239,68,68,0.12)"
-            : "rgba(99,102,241,0.12)",
-
-          color: danger
-            ? "#EF4444"
-            : "#6366F1",
-
+          width: "50px",
+          height: "50px",
+          borderRadius: "12px",
+          background: `rgba(${parseInt(color.slice(1, 3), 16) || 0}, ${parseInt(color.slice(3, 5), 16) || 0}, ${parseInt(color.slice(5, 7), 16) || 0}, 0.08)`,
+          color: color,
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-
-          fontSize: "22px",
-          marginBottom: "20px"
+          justifyContent: "center"
         }}
       >
         {icon}
       </div>
-
-      <p
-        style={{
-          color: "#64748B",
-          marginBottom: "10px"
-        }}
-      >
-        {title}
-      </p>
-
-      <h2
-        style={{
-          color: "#111827",
-          fontSize: "34px"
-        }}
-      >
-        {value}
-      </h2>
-
+      <div>
+        <p style={{ color: "#475569", fontSize: "13px", marginBottom: "6px", fontWeight: "500" }}>{title}</p>
+        <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F172A", margin: 0 }}>{value}</h2>
+      </div>
     </div>
-
-  );
-}
-
-function Node({
-  top,
-  left,
-  label,
-  color,
-  size = "75px"
-}) {
-
-  return (
-
-    <div
-      style={{
-        position: "absolute",
-        top,
-        left,
-
-        width: size,
-        height: size,
-
-        borderRadius: "50%",
-
-        background: color,
-
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-
-        color: "white",
-        fontWeight: "600",
-
-        boxShadow:
-          "0 10px 30px rgba(0,0,0,0.15)"
-      }}
-    >
-
-      <span
-        style={{
-          fontSize: "12px",
-          textAlign: "center",
-          padding: "6px"
-        }}
-      >
-        {label}
-      </span>
-
-    </div>
-
-  );
-}
-
-function Line({
-  top,
-  left,
-  rotate
-}) {
-
-  return (
-
-    <div
-      style={{
-        position: "absolute",
-        top,
-        left,
-
-        width: "180px",
-        height: "3px",
-
-        background:
-          "linear-gradient(90deg,#6366F1,#8B5CF6)",
-
-        transform: `rotate(${rotate}deg)`
-      }}
-    />
-
   );
 }
