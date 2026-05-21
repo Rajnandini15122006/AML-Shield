@@ -47,10 +47,34 @@ const ruleRoutes = require("./routes/ruleRoutes");
 const app = express();
 
 
-// CORS FIX
+// CORS CONFIGURATION
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5000",
+  "http://localhost:3000"
+];
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL);
+}
 
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, or postman)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin matches allowed list or vercel subdomains
+    const isAllowed = allowedOrigins.includes(origin) || 
+                      origin.endsWith(".vercel.app") || 
+                      /^https:\/\/.*\.vercel\.app$/.test(origin);
+                      
+    if (isAllowed) {
+      return callback(null, true);
+    } else {
+      console.warn(`Origin ${origin} blocked by CORS`);
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 

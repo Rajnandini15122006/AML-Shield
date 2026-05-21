@@ -42,6 +42,9 @@ import "./index.css";
 import DataProvider
 from "./context/DataContext";
 
+// Set base URL for axios requests from environment variables
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || "";
+
 // Configure axios interceptor to attach JWT token
 axios.interceptors.request.use(
   (config) => {
