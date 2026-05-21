@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as parent image
-FROM node:18-bullseye-slim
+FROM node:20-bullseye-slim
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
